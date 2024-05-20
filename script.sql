@@ -55,3 +55,34 @@ BEGIN
     END LOOP;
     RAISE NOTICE 'Soma dos ímpares entre % e %: %', num1, num2, soma_impares;
 END $$;
+
+-- 1.4 Read an undetermined number of pairs values M and N (stop when any of these values is less or equal to zero).
+--For each pair, print the sequence from the smallest to the biggest (including both) and the sum of consecutive integers between them (including both).
+-- Gerar inteiros no intervalo de 0 a 100.
+
+DO $$
+DECLARE
+    m INTEGER;
+    n INTEGER;
+    i INTEGER;
+    soma INTEGER;
+BEGIN
+    LOOP
+        m := floor(random() * 100);
+        n := floor(random() * 100);
+        EXIT WHEN m <= 0 OR n <= 0;
+        RAISE NOTICE 'M e N são: % %', m, n;
+        IF m > n THEN
+            i := m;
+            m := n;
+            n := i;
+        END IF;
+        soma := 0;
+        RAISE NOTICE 'Sequencia: ';
+        FOR i IN m..n LOOP
+            RAISE NOTICE '%', i;
+            soma := soma + i;
+        END LOOP;
+        RAISE NOTICE 'Soma = %', soma;
+    END LOOP;
+END $$;
