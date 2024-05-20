@@ -30,3 +30,28 @@ BEGIN
     END LOOP;
     RAISE NOTICE 'Total de números positivos: %', cont_positivo;
 END $$;
+
+-- 1.3 Read two integer values X and Y. Print the sum of all odd values between them.
+-- Gerar inteiros no intervalo de 20 a 50
+
+DO $$
+DECLARE
+    num1 INTEGER := floor(random() * 31) + 20;
+    num2 INTEGER := floor(random() * 31) + 20;
+    temp INTEGER;
+    soma_impares INTEGER := 0;
+BEGIN
+    RAISE NOTICE 'Número 1: %', num1;
+    RAISE NOTICE 'Número 2: %', num2;
+    IF num1 > num2 THEN
+        temp := num1;
+        num1 := num2;
+        num2 := temp;
+    END IF;
+    FOR i IN num1+1..num2-1 LOOP
+        IF i % 2 != 0 THEN
+            soma_impares := soma_impares + i;
+        END IF;
+    END LOOP;
+    RAISE NOTICE 'Soma dos ímpares entre % e %: %', num1, num2, soma_impares;
+END $$;
