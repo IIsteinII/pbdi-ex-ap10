@@ -86,3 +86,29 @@ BEGIN
         RAISE NOTICE 'Soma = %', soma;
     END LOOP;
 END $$;
+
+-- 2. Faça um programa que calcule o determinante de uma matriz quadrada de ordem 3
+--utilizando a regra de Sarrus. Preencha a matriz com valores inteiros aleatórios no intervalo de 1 a 12.
+
+DO $$
+DECLARE
+    matriz INTEGER[][];
+    det INTEGER;
+BEGIN
+    matriz := ARRAY[
+        [FLOOR(RANDOM() * 12 + 1), FLOOR(RANDOM() * 12 + 1), FLOOR(RANDOM() * 12 + 1)],
+        [FLOOR(RANDOM() * 12 + 1), FLOOR(RANDOM() * 12 + 1), FLOOR(RANDOM() * 12 + 1)],
+        [FLOOR(RANDOM() * 12 + 1), FLOOR(RANDOM() * 12 + 1), FLOOR(RANDOM() * 12 + 1)]
+    ];
+    RAISE NOTICE 'Matriz:';
+    FOR i IN 1..3 LOOP
+        RAISE NOTICE '% % %', matriz[i][1], matriz[i][2], matriz[i][3];
+    END LOOP;
+    det := matriz[1][1] * matriz[2][2] * matriz[3][3] +
+           matriz[1][2] * matriz[2][3] * matriz[3][1] +
+           matriz[1][3] * matriz[2][1] * matriz[3][2] -
+           matriz[1][3] * matriz[2][2] * matriz[3][1] -
+           matriz[1][2] * matriz[2][1] * matriz[3][3] -
+           matriz[1][1] * matriz[2][3] * matriz[3][2];
+    RAISE NOTICE 'Determinante: %', det;
+END $$;
